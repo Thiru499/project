@@ -4,28 +4,28 @@ pipeline {
         DOCKER_IMAGE_NAME = 'react-app'
         DOCKERHUB_USERNAME = 'thiru876'
         DOCKERHUB_CREDENTIALS_ID = 'docker'
-        DOCKER_REPO = 'dev'  // The name of the existing repository on Docker Hub
+        DOCKER_REPO = 'prod'  // The name of the existing repository on Docker Hub
     }
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Thiru499/project.git'
+                git branch: 'main', url: 'https://github.com/Thiru499/project.git'
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image and tag it with 'dev' repository and 'dev' tag
+                    // Build the Docker image and tag it with 'prod' repository and 'prod' tag
                     docker.build("${DOCKERHUB_USERNAME}/${DOCKER_REPO}:${DOCKER_IMAGE_NAME}")
                 }
             }
         }
-        stage('Push to Docker Hub - Dev') {
+        stage('Push to Docker Hub - Prod') {
             steps {
                 script {
                     // Push the image to the existing 'dev' repository with the 'dev' tag
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                        docker.image("${DOCKERHUB_USERNAME}/${DOCKER_REPO}:${DOCKER_IMAGE_NAME}").push("dev")	
+                        docker.image("${DOCKERHUB_USERNAME}/${DOCKER_REPO}:${DOCKER_IMAGE_NAME}").push("prod")	
                     }
                 }
             }
