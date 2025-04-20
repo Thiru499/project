@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'react-app'
         DOCKERHUB_USERNAME = 'thiru876'
-        DOCKERHUB_CREDENTIALS_ID = 'thiru8767'
+        DOCKERHUB_CREDENTIALS_ID = 'docker'
         DOCKER_REPO = 'dev'  // The name of the existing repository on Docker Hub
     }
     stages {
